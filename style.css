@@ -1,0 +1,359 @@
+/* ===== EDIT HERE: rong ar font ekhan theke bodlano jabe ===== */
+:root {
+  --bg: #000000;
+  --surface: #ffffff;
+  --ink: #e7f4f1;
+  --muted: #91a69f;
+  --line: #cfd9d4;
+  --accent: #fde027;
+  --accent-ink: #ffffff;
+  --font-head: "Bricolage Grotesque", "Noto Sans Bengali", system-ui, sans-serif;
+  --font-body: "DM Sans", "Noto Sans Bengali", system-ui, sans-serif;
+
+  /* ===== ANIMATION SETTINGS: speed ekhan theke change korun ===== */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --t-fast: .2s;
+  --t-med: .45s;
+  --t-slow: .9s;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
+
+/* ===================================================
+   KEYFRAMES (sob animation er definition ekhane)
+   =================================================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.6) rotate(-8deg); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(253, 224, 39, .55); }
+  70%  { box-shadow: 0 0 0 28px rgba(253, 224, 39, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(253, 224, 39, 0); }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+@keyframes drawLine {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ----- Header ----- */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem clamp(1rem, 5vw, 4rem);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  animation: fadeDown var(--t-slow) var(--ease) both;
+}
+.brand {
+  font-family: var(--font-head); font-weight: 800; font-size: 1.25rem; text-decoration: none;
+  display: inline-block;
+  transition: transform var(--t-med) var(--ease), color var(--t-fast) ease;
+}
+.brand:hover { transform: rotate(-3deg) scale(1.06); color: var(--accent); }
+
+.nav { display: flex; gap: 1.75rem; }
+.nav a {
+  position: relative; text-decoration: none; font-weight: 500; color: var(--muted);
+  transition: color var(--t-fast) ease, transform var(--t-fast) ease;
+  animation: fadeUp .7s var(--ease) both;
+}
+.nav a:nth-child(1) { animation-delay: .25s; }
+.nav a:nth-child(2) { animation-delay: .33s; }
+.nav a:nth-child(3) { animation-delay: .41s; }
+.nav a:nth-child(4) { animation-delay: .49s; }
+.nav a:nth-child(5) { animation-delay: .57s; }
+/* hover e niche accent line ta bam theke dan e ashbe */
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--t-med) var(--ease);
+}
+.nav a:hover { color: var(--ink); transform: translateY(-2px); }
+.nav a:hover::after { transform: scaleX(1); }
+
+.menu-btn {
+  display: none; background: none; border: 1px solid var(--ink);
+  border-radius: 999px; padding: .35rem 1rem; font: inherit; color: var(--ink); cursor: pointer;
+  transition: background var(--t-fast) ease, color var(--t-fast) ease, transform var(--t-fast) ease;
+}
+.menu-btn:hover { background: var(--ink); color: var(--bg); }
+.menu-btn:active { transform: scale(.93); }
+
+/* ----- Layout ----- */
+main, .site-footer { max-width: 1080px; margin: 0 auto; padding-inline: clamp(1rem, 5vw, 2rem); }
+.section { position: relative; padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--line); }
+.section h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+.section-intro { color: var(--muted); margin-top: .5rem; margin-bottom: 2.25rem; max-width: 55ch; }
+
+/* ----- Hero ----- */
+.hero {
+  display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 6.5vw, 4.6rem); font-weight: 800; letter-spacing: -0.02em;
+  animation: fadeUp var(--t-slow) var(--ease) .2s both;
+}
+/* naam ta shimmer korbe (golden shine) */
+.hero .name {
+  color: var(--accent);
+  background: linear-gradient(100deg, var(--accent) 35%, #fff6b0 50%, var(--accent) 65%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear 1.2s infinite;
+}
+.lead {
+  margin-top: 1.5rem; max-width: 52ch; color: var(--muted); font-size: 1.15rem;
+  animation: fadeUp var(--t-slow) var(--ease) .4s both;
+}
+.hero-actions {
+  display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem;
+  animation: fadeUp var(--t-slow) var(--ease) .6s both;
+}
+.avatar {
+  width: clamp(130px, 22vw, 240px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink);
+  display: grid; place-items: center;
+  font-family: var(--font-head); font-weight: 800; font-size: clamp(2.5rem, 7vw, 5rem);
+  overflow: hidden;
+  animation:
+    popIn 1s var(--ease) .3s both,
+    float 6s ease-in-out 1.3s infinite,
+    pulseRing 3s ease-out 1.5s infinite;
+  transition: filter var(--t-med) ease;
+}
+.avatar:hover { filter: brightness(1.12); animation-play-state: running, paused, running; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-slow) var(--ease); }
+.avatar:hover img { transform: scale(1.1); }
+
+/* ----- Buttons ----- */
+.btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-block; padding: .8rem 1.6rem; border-radius: 999px;
+  font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; border: 2px solid var(--ink);
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast) ease,
+              color var(--t-fast) ease, border-color var(--t-fast) ease, box-shadow var(--t-med) ease;
+}
+/* shine sweep effect */
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px -8px rgba(253, 224, 39, .45); }
+.btn:hover::before { transform: translateX(120%); transition: transform .7s var(--ease); }
+.btn:active { transform: scale(.95); }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); }
+
+/* ----- Services ----- */
+.services { list-style: none; border-top: 2px solid var(--ink); }
+.services li {
+  position: relative;
+  display: grid; grid-template-columns: 1fr 2fr auto; gap: 1.5rem; align-items: baseline;
+  padding-block: 1.5rem; border-bottom: 1px solid var(--line);
+  transition: padding-left var(--t-med) var(--ease), background var(--t-med) ease;
+}
+/* hover korle bam pashe accent bar ar content sorbe */
+.services li::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--accent); transform: scaleY(0); transform-origin: top;
+  transition: transform var(--t-med) var(--ease);
+}
+.services li:hover { padding-left: 1.25rem; background: rgba(253, 224, 39, .05); }
+.services li:hover::before { transform: scaleY(1); }
+.services h3 { font-size: 1.35rem; transition: color var(--t-fast) ease; }
+.services li:hover h3 { color: var(--accent); }
+.services p { color: var(--muted); }
+.price { font-weight: 700; white-space: nowrap; transition: transform var(--t-med) var(--ease); }
+.services li:hover .price { transform: scale(1.12); }
+
+/* ----- Projects ----- */
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+.project { transition: transform var(--t-med) var(--ease); }
+.project:hover { transform: translateY(-8px); }
+.project h3 { margin-top: 1rem; font-size: 1.3rem; }
+.project p { color: var(--muted); margin-top: .35rem; }
+.project .tags { font-size: .9rem; }
+.project a {
+  position: relative; display: inline-block; margin-top: .6rem; font-weight: 700; color: var(--accent);
+  transition: letter-spacing var(--t-med) var(--ease);
+}
+.project a:hover { letter-spacing: .06em; }
+.thumb {
+  aspect-ratio: 16 / 10; border-radius: 10px;
+  background-size: 160% 160%;
+  transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) ease,
+              background-position var(--t-slow) ease;
+  animation: gradientMove 8s ease-in-out infinite alternate;
+}
+@keyframes gradientMove {
+  from { background-position: 0% 0%; }
+  to   { background-position: 100% 100%; }
+}
+.project:hover .thumb { transform: scale(1.04) rotate(-.8deg); box-shadow: 0 18px 40px -14px rgba(253, 224, 39, .35); }
+.thumb-a { background-image: linear-gradient(135deg, #2b4eff, #7fa0ff); }
+.thumb-b { background-image: linear-gradient(135deg, #14231f, #3d6b5c); }
+.thumb-c { background-image: linear-gradient(135deg, #ff7a59, #ffc27a); }
+
+/* ----- About ----- */
+.about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-top: 1.5rem; }
+.about-grid p + p { margin-top: 1rem; }
+.about h3 { font-size: 1.15rem; margin-bottom: .75rem; }
+.skills { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; }
+.skills li {
+  border: 1px solid var(--ink); border-radius: 999px; padding: .2rem .9rem; font-size: .95rem;
+  cursor: default;
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast) ease,
+              color var(--t-fast) ease, border-color var(--t-fast) ease;
+}
+.skills li:hover {
+  transform: translateY(-4px) rotate(-2deg);
+  background: var(--accent); color: #000; border-color: var(--accent);
+}
+
+/* ----- Contact ----- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.contact-list { list-style: none; }
+.contact-list li {
+  padding-block: .9rem; border-bottom: 1px solid var(--line); display: flex; flex-direction: column;
+  transition: padding-left var(--t-med) var(--ease);
+}
+.contact-list li:hover { padding-left: .75rem; }
+.contact-list span { font-size: .9rem; color: var(--muted); }
+.contact-list a { font-weight: 700; text-decoration: none; transition: color var(--t-fast) ease; }
+.contact-list a:hover { color: var(--accent); }
+.form { display: grid; gap: 1rem; }
+.form label { display: grid; gap: .3rem; font-weight: 500; transition: color var(--t-fast) ease; }
+.form label:focus-within { color: var(--accent); }
+.form input, .form textarea {
+  font: inherit; padding: .7rem .9rem; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--surface); color: var(--ink);
+  transition: border-color var(--t-fast) ease, box-shadow var(--t-fast) ease, transform var(--t-fast) var(--ease);
+}
+.form input:focus, .form textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(253, 224, 39, .35);
+  transform: translateY(-2px);
+}
+/* ভুল input e shake (browser validation er sathe kaj kore) */
+.form input:user-invalid, .form textarea:user-invalid {
+  border-color: #ff5a5a; animation: shake .4s ease;
+}
+.form button { justify-self: start; }
+.form-note { min-height: 1.5em; color: var(--muted); animation: slideDown .4s var(--ease) both; }
+
+/* ----- Footer ----- */
+.site-footer { padding-block: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; }
+
+/* ===================================================
+   SCROLL ANIMATION (CSS only, JS lagbe na)
+   Scroll korle section gulo dhire dhire ashbe.
+   Chrome / Edge / Safari te kaj korbe; purono browser e
+   normalbhabe dekhabe (kono problem hobe na).
+   =================================================== */
+@supports (animation-timeline: view()) {
+  .section h2,
+  .section-intro,
+  .services li,
+  .project,
+  .about-grid > *,
+  .contact-grid > *,
+  .site-footer {
+    animation: fadeUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+
+  /* ekta ekta kore ashbe (stagger) */
+  .project:nth-child(2) { animation-range: entry 8% entry 63%; }
+  .project:nth-child(3) { animation-range: entry 16% entry 71%; }
+
+  /* section er upore line ta scroll e ankhe */
+  .section::before {
+    content: ""; position: absolute; top: -1px; left: 0; height: 2px; width: 100%;
+    background: var(--accent); transform-origin: left;
+    animation: drawLine linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+
+  /* page er upore scroll progress bar */
+  body::before {
+    content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 20;
+    background: var(--accent); transform-origin: left; transform: scaleX(0);
+    animation: drawLine linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+/* ----- Mobile ----- */
+@media (max-width: 760px) {
+  .menu-btn { display: block; }
+  .nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line);
+  }
+  .nav.open { display: flex; animation: slideDown .35s var(--ease) both; }
+  .nav a { padding: 1rem clamp(1rem, 5vw, 4rem); border-top: 1px solid var(--line); }
+  .nav a::after { display: none; }
+  .nav a:hover { transform: none; padding-left: calc(clamp(1rem, 5vw, 4rem) + .5rem); }
+  .hero { grid-template-columns: 1fr; }
+  .avatar { order: -1; }
+  .services li { grid-template-columns: 1fr; gap: .25rem; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* Jader motion e osubidha hoy tader jonno sob animation bondho */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hero .name { -webkit-text-fill-color: var(--accent); background: none; }
+}
