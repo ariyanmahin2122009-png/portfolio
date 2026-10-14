@@ -3,10 +3,10 @@
 :root {
   --bg: #000000;
   --surface: #ffffff;
-  --ink: #e7f4f1;
+  --ink: #ac4be5;
   --muted: #91a69f;
   --line: #3a4743;          /* aage khub ujjol chilo, ekhon soft */
-  --accent: #fde027;
+  --accent: #8bfd27;
   --accent-ink: #000000;    /* yellow er upor kalo text, jate pora jay */
   --font-head: "Bricolage Grotesque", "Noto Sans Bengali", system-ui, sans-serif;
   --font-body: "DM Sans", "Noto Sans Bengali", system-ui, sans-serif;
